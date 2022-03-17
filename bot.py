@@ -9,7 +9,7 @@ from time import sleep, strftime, localtime
 
 time = lambda x: strftime("%H:%M:%S %d.%m.%Y", localtime(x))
 
-TOKEN = ''  # <<<<<<<-----------Your telegram bot token here
+TOKEN = '1608661410:AAFEtQIDk-eoZd4tSuAMhsien2X6_Yk6LWE'  # <<<<<<<-----------Your telegram bot token here
 bot = TeleBot(TOKEN)
 CURRENCIES = ['AED', 'AFN', 'ALL', 'AMD', 'ANG', 'AOA', 'ARS', 'AUD', 'AWG', 'AZN', 'BAM', 'BBD', 'BDT', 'BGN', 'BHD',
               'BIF', 'BMD', 'BND', 'BOB', 'BRL', 'BSD', 'BTN', 'BWP', 'BYN', 'BZD', 'CAD',
@@ -58,6 +58,9 @@ def choice(message):
         send_welcome(message)
     elif message.text == '/currencies':
         currencies(message)
+    elif message.text == 'Ссылки на автора бота':
+        send_links(message)
+
 
 
 def to_currency(message):
@@ -70,7 +73,8 @@ def to_currency(message):
 @bot.message_handler(commands=['currencies'])
 def currencies(message):
     chat_id = message.chat.id
-    bot.send_message(chat_id, f'Вот все доступные валюты: {CURRENCIES}')
+    msg = bot.send_message(chat_id, f'Вот все доступные валюты: {CURRENCIES}')
+    bot.register_next_step_handler(msg, choice)
 
 
 @bot.message_handler(commands=['123'])
@@ -185,6 +189,12 @@ def blur_amount(message, width, length):
     else:
         bot.send_message(chat_id, 'Вы ввели неверное число! :( ')
         send_welcome(message)
+
+
+def send_links(message):
+    chat_id = message.chat.id
+    msg = bot.send_message(chat_id, "GitHub: https://github.com/MisteryDush\n"
+                                    "itch.io: https://misterydush.itch.io/")
 
 
 bot.polling(none_stop=True)

@@ -7,11 +7,13 @@ def generate_main_menu():
     btn3 = KeyboardButton(text='Рандомная картинка')
     btn4 = KeyboardButton(text='Таймер/напоминалка')
     btn5 = KeyboardButton(text='Секретная кнопка ;)')
+    btn6 = KeyboardButton(text='Ссылки на автора бота')
     keyboard.row(btn1)
     keyboard.row(btn2)
     keyboard.row(btn3)
     keyboard.row(btn4)
     keyboard.row(btn5)
+    keyboard.row(btn6)
     return keyboard
 
 def generate_bnw_blur():
